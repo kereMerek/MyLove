@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- Mobil cihazlar için viewport ayarı -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I L💙VE YOUU</title>
+    <!-- p5.js kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+      body {
+        margin: 0;
+        background-color: black;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let baseScale = 10;   // Temel ölçek
+      let amplitude = 2;    // Ölçek salınımı (amplitüd)
+      let angle = 0;        // Animasyon için açı değeri
+      let hueVal = 300;     // Sabit mor ton (HSB: hue=300)
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+        colorMode(HSB, 360, 100, 100, 100);
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+
+      // Kalp şeklini çizme fonksiyonu
+      function drawHeart(scaleVal, col) {
+        fill(col);
+        push();
+        translate(width / 2, height / 2);
+        beginShape();
+        for (let t = 0; t <= 360; t += 2) {
+          let rad = radians(t);
+          let x = 16 * pow(sin(rad), 3);
+          let y = 13 * cos(rad) - 5 * cos(2 * rad) - 2 * cos(3 * rad) - cos(4 * rad);
+          vertex(x * scaleVal, -y * scaleVal);
+        }
+        endShape(CLOSE);
+        pop();
+      }
+
+      // Glow (parlama) efekti için ek katmanlar
+      function drawGlow(scaleVal, bright) {
+        for (let i = 8; i > 0; i--) {
+          let alpha = map(i, 0, 8, 0, 20);
+          let sizeFactor = scaleVal + i;
+          let glowColor = color(hueVal, 80, bright, alpha);
+          drawHeart(sizeFactor, glowColor);
+        }
+      }
+
+      function draw() {
+        background(0);
+
+        // Kalp büyüklüğü için pulsating ölçek
+        let scaleVal = baseScale + amplitude * sin(radians(angle));
+
+        // Kalbin parlaklık değerini dinamik ayarla: sinüs dalgasıyla açık (100) - koyu (50) arasında geçiş
+        let bright = map(sin(radians(angle)), -1, 1, 50, 100);
+
+        // Ana kalp rengi
+        let heartColor = color(hueVal, 80, bright);
+
+        // Glow efektli katmanlar ve ana kalp
+        drawGlow(scaleVal, bright);
+        drawHeart(scaleVal, heartColor);
+
+        // Animasyon güncellemesi
+        angle = (angle + 1) % 360;
+      }
+    </script>
+  </body>
+</html>
