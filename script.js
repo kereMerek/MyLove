@@ -1,7 +1,7 @@
 let baseScale = 10;
 let amplitude = 2;
 let angle = 0;
-let hueVal = 300;
+let hueVal = 210; // Mavi tonu için 300'den 210'a çekildi
 
 let clickAnimTime = -1;
 const clickAnimDuration = 40;
