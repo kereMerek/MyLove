@@ -1,10 +1,57 @@
-/* style.css */
+/* Google Fonts'tan zarif ve duygusal bir font içe aktarılıyor */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* Orijinal kodların */
 body {
-    margin: 0;
-    background-color: black;
-    overflow: hidden;
-  }
-  
-  canvas {
-    display: block;
-  }
+  margin: 0;
+  background-color: black;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+}
+
+/* YENİ EKLENEN TEMA UYUMLU BAŞLANGIÇ EKRANI STİLLERİ */
+#baslangic-ekrani {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Dümdüz siyah yerine, merkeze doğru çok hafif aydınlanan karanlık bir arka plan */
+  background: radial-gradient(circle, rgba(15, 20, 25, 0.96) 0%, rgba(0, 0, 0, 0.99) 100%);
+  color: #e6f2ff; /* Sitedeki mavi kalp tonuna uygun buz mavimsi beyaz */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+}
+
+.yazi-icerigi {
+  max-width: 850px;
+  width: 85%;
+  text-align: center;
+  line-height: 1.8;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  /* Yazıya temanın renginde çok hafif ve romantik bir parlama efekti */
+  text-shadow: 0px 0px 15px rgba(100, 180, 255, 0.25); 
+}
+
+.tikla-yazisi {
+  margin-top: 50px;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #64b4ff; /* Mavi kalp ile aynı tonda */
+  animation: kalp-atisi-gibi-yanip-sonme 2.5s infinite ease-in-out;
+  text-shadow: 0px 0px 10px rgba(100, 180, 255, 0.5);
+}
+
+/* Daha yumuşak, kalp atışı hissiyatı veren animasyon */
+@keyframes kalp-atisi-gibi-yanip-sonme {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.98); }
+}
